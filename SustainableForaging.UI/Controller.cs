@@ -53,11 +53,10 @@ namespace SustainableForaging.UI
                         AddForage();
                         break;
                     case MainMenuOption.AddForager:
-                        view.DisplayStatus(false, "NOT IMPLEMENTED");
-                        view.EnterToContinue();
+                        AddForager();
                         break;
                     case MainMenuOption.ViewForagers:
-                        view.DisplayStatus(false, "NOT IMPLEMENTED");
+                        ViewForagers();
                         view.EnterToContinue();
                         break;
                     case MainMenuOption.AddItem:
@@ -95,6 +94,22 @@ namespace SustainableForaging.UI
             view.DisplayHeader("Items");
             view.DisplayItems(items);
             view.EnterToContinue();
+        }
+
+        public void ViewForagers()
+        {
+            Console.Clear();
+            view.DisplayHeader(MainMenuOption.ViewForagers.ToLabel());
+            string lastNamePrefix = view.GetForagerNamePrefix();
+            List<Forager> foragers = foragerService.FindByLastName(lastNamePrefix);
+            view.DisplayForagers(foragers);
+        }
+
+        private void AddForager()
+        {
+            view.DisplayHeader(MainMenuOption.AddForager.ToLabel());
+            Forager forager = view.MakeForager();
+            Console.WriteLine(foragerService.Add(forager) ? "Forager added" : "Forager not added");
         }
 
         private void AddForage()

@@ -7,6 +7,8 @@ namespace SustainableForaging.Core.Repositories
     {
         Forager FindById(string id);
 
+        bool Add(Forager forager);
+
         List<Forager> FindAll();
 
         List<Forager> FindByState(string stateAbbr);

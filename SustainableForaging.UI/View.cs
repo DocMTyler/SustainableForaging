@@ -46,6 +46,30 @@ namespace SustainableForaging.UI
             return io.ReadRequiredString("Forager last name starts with: ");
         }
 
+        public string GetForagerFirstName()
+        {
+            io.Print("Please enter the forager's first name: ");
+            return Console.ReadLine(); 
+        }
+
+        public string GetForagerLastName()
+        {
+            io.Print("Please enter the forager's Last name: ");
+            return Console.ReadLine();
+        }
+
+        public string GetForagerState()
+        {
+            io.Print("Please enter the forager's state two letter abbreviation(i.e. TX - Texas, CA - California): ");
+            var state = Console.ReadLine().ToUpper();
+            while(state.Length > 2)
+            {
+                io.PrintLine("Abbreviation is too long. Please enter a TWO letter abbreviation.");
+                state = Console.ReadLine().ToUpper();
+            }
+            return state;
+        }
+
         public Forager ChooseForager(List<Forager> foragers)
         {
             if(foragers == null || foragers.Count == 0)
@@ -108,6 +132,15 @@ namespace SustainableForaging.UI
             }
 
             return item;
+        }
+
+        public Forager MakeForager()
+        {
+            Forager forager = new();
+            forager.FirstName = GetForagerFirstName();
+            forager.LastName = GetForagerLastName();
+            forager.State = GetForagerState();
+            return forager;
         }
 
         public Forage MakeForage(Forager forager, Item item)
@@ -206,6 +239,27 @@ namespace SustainableForaging.UI
                         forage.Item.Category,
                         forage.Value)
                 );
+            }
+        }
+
+        public void DisplayForagers(List<Forager> foragers)
+        {
+            if (foragers == null || foragers.Count == 0)
+            {
+                io.PrintLine("No foragers found");
+                return;
+            }
+
+            int index = 1;
+            foreach (Forager forager in foragers.Take(25))
+            {
+                io.PrintLine($"{index++}: {forager.FirstName} {forager.LastName}, State:{forager.State}");
+            }
+            index--;
+
+            if (foragers.Count > 25)
+            {
+                io.PrintLine("More than 25 foragers found. Showing first 25. Please refine your search.");
             }
         }
 
