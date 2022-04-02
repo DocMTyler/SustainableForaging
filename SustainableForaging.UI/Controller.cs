@@ -76,23 +76,6 @@ namespace SustainableForaging.UI
         }
 
         // top level menu
-        private void StatsKgPerItem()
-        {
-            DateTime date = view.GetKgPerItem();
-            List<Forage> forages = forageService.FindByDate(date);
-            Dictionary<Item, decimal?> kgOfItems = forageService.KilogramPerItemStats(forages);
-            view.DisplayStatsKgPerItem(kgOfItems);
-            view.EnterToContinue();
-        }
-
-        private void StatsValuePerCategory()
-        {
-            DateTime date = view.GetValuePerCategory();
-            List<Forage> forages = forageService.FindByDate(date);
-            Dictionary<Category, decimal?> valuePerCategory = forageService.ValuePerCategory(forages);
-            view.DisplayStatsValuePerCategory(valuePerCategory);
-            view.EnterToContinue();
-        }
 
         private void ViewByDate()
         {
@@ -167,6 +150,24 @@ namespace SustainableForaging.UI
                 string successMessage = $"Item {result.Value.Id} created.";
                 view.DisplayStatus(true, successMessage);
             }
+        }
+
+        private void StatsKgPerItem()
+        {
+            DateTime date = view.GetKgPerItem();
+            List<Forage> forages = forageService.FindByDate(date);
+            Dictionary<Item, decimal?> kgOfItems = forageService.KilogramPerItemStats(forages);
+            view.DisplayStatsKgPerItem(kgOfItems);
+            view.EnterToContinue();
+        }
+
+        private void StatsValuePerCategory()
+        {
+            DateTime date = view.GetValuePerCategory();
+            List<Forage> forages = forageService.FindByDate(date);
+            Dictionary<Category, decimal?> valuePerCategory = forageService.ValuePerCategory(forages);
+            view.DisplayStatsValuePerCategory(valuePerCategory);
+            view.EnterToContinue();
         }
 
         private void Generate()
