@@ -16,6 +16,16 @@ namespace SustainableForaging.BLL.Tests.TestDoubles
         {
             foragers.Add(FORAGER);
         }
+        
+        public bool Add(Forager forager)
+        {
+            forager.Id = Guid.NewGuid().ToString();
+            int beforeAdd = foragers.Count;
+            foragers.Add(forager);
+            int afterAdd = foragers.Count;
+            return beforeAdd != afterAdd;
+        }
+        
         public List<Forager> FindAll()
         {
             return foragers;

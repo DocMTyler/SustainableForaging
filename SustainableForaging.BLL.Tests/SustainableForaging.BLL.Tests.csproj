@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SustainableForaging.BLL\SustainableForaging.BLL.csproj" />
     <ProjectReference Include="..\SustainableForaging.Core\SustainableForaging.Core.csproj" />
+    <ProjectReference Include="..\SustainableForaging.DAL.Tests\SustainableForaging.DAL.Tests.csproj" />
   </ItemGroup>
 
 </Project>

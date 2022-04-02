@@ -19,9 +19,9 @@ namespace SustainableForaging.BLL
 
         public bool Add(Forager forager)
         {
-            if (String.IsNullOrEmpty(forager.ToString()))
+            if (String.IsNullOrEmpty(forager.FirstName) || String.IsNullOrEmpty(forager.LastName) || String.IsNullOrEmpty(forager.State))
             {
-                Console.WriteLine("Cannot add an empty forager");
+                Console.WriteLine("Name and state fields cannot be empty");
                 return false;
             }
 

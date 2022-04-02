@@ -6,12 +6,24 @@ namespace SustainableForaging.DAL.Tests
 {
     public class ForagerFileRepositoryTest
     {
+        ForagerFileRepository repo = new ForagerFileRepository(@"data\foragers.csv");
+
         [Test]
         public void ShouldFindAll()
         {
-            ForagerFileRepository repo = new ForagerFileRepository(@"data\foragers.csv");
             List<Forager> all = repo.FindAll();
-            Assert.AreEqual(1000, all.Count);
+            Assert.AreEqual(1005, all.Count);
+        }
+
+        [Test]
+        public void AddShouldReturnTrueWhenForagerNotEmpty()
+        {
+            Forager forager = new();
+            forager.FirstName = "Bob";
+            forager.LastName = "Jenkins";
+            forager.State = "KY";
+            
+            Assert.IsTrue(repo.Add(forager));
         }
     }
 }
