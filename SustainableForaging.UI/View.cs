@@ -41,6 +41,18 @@ namespace SustainableForaging.UI
             return io.ReadDate("Select a date [MM/dd/yyyy]: ");
         }
 
+        public DateTime GetKgPerItem()
+        {
+            DisplayHeader(MainMenuOption.ReportKgPerItem.ToLabel());
+            return io.ReadDate("Select a date [MM/dd/yyyy]: ");
+        }
+
+        public DateTime GetValuePerCategory()
+        {
+            DisplayHeader(MainMenuOption.ReportCategoryValue.ToLabel());
+            return io.ReadDate("Select a date [MM/dd/yyyy]: ");
+        }
+
         public string GetForagerNamePrefix()
         {
             return io.ReadRequiredString("Forager last name starts with: ");
@@ -239,6 +251,42 @@ namespace SustainableForaging.UI
                         forage.Item.Category,
                         forage.Value)
                 );
+            }
+        }
+
+        public void DisplayStatsKgPerItem(Dictionary<Item, decimal?> kgOfItems)
+        {
+            if(kgOfItems == null)
+            {
+                io.PrintLine("No items found.");
+                return;
+            }
+
+            foreach(var entry in kgOfItems)
+            {
+                io.PrintLine(
+                    string.Format("{0} - {1:0.00} kgs",
+                        entry.Key.Name, 
+                        entry.Value)
+                    );
+            }
+        }
+
+        public void DisplayStatsValuePerCategory(Dictionary<Category, decimal?> valuePerCategory)
+        {
+            if (valuePerCategory == null)
+            {
+                io.PrintLine("Not found.");
+                return;
+            }
+
+            foreach (var entry in valuePerCategory)
+            {
+                io.PrintLine(
+                    string.Format("{0} - ${1:0.00}",
+                        entry.Key,
+                        entry.Value)
+                    );
             }
         }
 

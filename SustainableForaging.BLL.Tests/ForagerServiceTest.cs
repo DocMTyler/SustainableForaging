@@ -14,7 +14,7 @@ namespace SustainableForaging.BLL.Tests
         {
             Forager forager = new();
             forager.FirstName = "Bobby";
-            forager.LastName = "James";
+            forager.LastName = "Jame";
             forager.State = "KY";
 
             Assert.IsTrue(foragerService.Add(forager));

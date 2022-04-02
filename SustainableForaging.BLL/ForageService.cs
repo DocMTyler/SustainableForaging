@@ -36,6 +36,44 @@ namespace SustainableForaging.BLL
             return result;
         }
 
+        public Dictionary<Item, decimal?> KilogramPerItemStats(List<Forage> forages)
+        {
+            Dictionary<Item, decimal?> kgOfItems = new();
+
+            foreach(var forage in forages)
+            {
+                if (!kgOfItems.ContainsKey(forage.Item))
+                {
+                    kgOfItems[forage.Item] = forage.Kilograms;
+                }
+                else
+                {
+                    kgOfItems[forage.Item] += forage.Kilograms;
+                }
+            }
+            
+            return kgOfItems;
+        }
+
+        public Dictionary<Category, decimal?> ValuePerCategory(List<Forage> forages)
+        {
+            Dictionary<Category, decimal?> valuePerCategory = new();
+
+            foreach (var forage in forages)
+            {
+                if (!valuePerCategory.ContainsKey(forage.Item.Category))
+                {
+                    valuePerCategory[forage.Item.Category] = forage.Value;
+                }
+                else
+                {
+                    valuePerCategory[forage.Item.Category] += forage.Value;
+                }
+            }
+
+            return valuePerCategory;
+        }
+
         public Result<Forage> Add(Forage forage)
         {
             Result<Forage> result = Validate(forage);

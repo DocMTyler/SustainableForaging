@@ -32,6 +32,7 @@ namespace SustainableForaging.DAL
             var path = GetFilePath(date);
             if(!File.Exists(path))
             {
+                Console.WriteLine("No forages found for that date.");
                 return forages;
             }
 

@@ -63,12 +63,10 @@ namespace SustainableForaging.UI
                         AddItem();
                         break;
                     case MainMenuOption.ReportKgPerItem:
-                        view.DisplayStatus(false, "NOT IMPLEMENTED");
-                        view.EnterToContinue();
+                        StatsKgPerItem();
                         break;
                     case MainMenuOption.ReportCategoryValue:
-                        view.DisplayStatus(false, "NOT IMPLEMENTED");
-                        view.EnterToContinue();
+                        StatsValuePerCategory();
                         break;
                     case MainMenuOption.Generate:
                         Generate();
@@ -78,6 +76,24 @@ namespace SustainableForaging.UI
         }
 
         // top level menu
+        private void StatsKgPerItem()
+        {
+            DateTime date = view.GetKgPerItem();
+            List<Forage> forages = forageService.FindByDate(date);
+            Dictionary<Item, decimal?> kgOfItems = forageService.KilogramPerItemStats(forages);
+            view.DisplayStatsKgPerItem(kgOfItems);
+            view.EnterToContinue();
+        }
+
+        private void StatsValuePerCategory()
+        {
+            DateTime date = view.GetValuePerCategory();
+            List<Forage> forages = forageService.FindByDate(date);
+            Dictionary<Category, decimal?> valuePerCategory = forageService.ValuePerCategory(forages);
+            view.DisplayStatsValuePerCategory(valuePerCategory);
+            view.EnterToContinue();
+        }
+
         private void ViewByDate()
         {
             DateTime date = view.GetForageDate();
